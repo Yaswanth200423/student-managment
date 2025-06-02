@@ -1,0 +1,54 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class StudentManagementSystem {
+    private HashMap<String, Student> students;
+
+    public StudentManagementSystem() {
+        students = new HashMap<>();
+    }
+
+    public void addStudent(String id, String name, int age) {
+        Student student = new Student(id, name, age);
+        students.put(id, student);
+        System.out.println("Student added: " + student);
+    }
+
+    public void removeStudent(String id) {
+        if (students.remove(id) != null) {
+            System.out.println("Student with ID " + id + " removed.");
+        } else {
+            System.out.println("Student with ID " + id + " not found.");
+        }
+    }
+
+    public void displayStudent(String id) {
+        Student student = students.get(id);
+        if (student != null) {
+            System.out.println("Student found: " + student);
+        } else {
+            System.out.println("Student with ID " + id + " not found.");
+        }
+    }
+
+    public void displayAllStudents() {
+        if (students.isEmpty()) {
+            System.out.println("No students found.");
+        } else {
+            System.out.println("All Students:");
+            for (Map.Entry<String, Student> entry : students.entrySet()) {
+                System.out.println(entry.getValue());
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        StudentManagementSystem sms = new StudentManagementSystem();
+        sms.addStudent("1", "Alice", 20);
+        sms.addStudent("2", "Bob", 22);
+        sms.displayAllStudents();
+        sms.displayStudent("1");
+        sms.removeStudent("2");
+        sms.displayAllStudents();
+    }
+}
